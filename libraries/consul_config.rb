@@ -71,6 +71,7 @@ module ConsulCookbook
       attribute(:server_name, kind_of: String)
       attribute(:skip_leave_on_interrupt, equal_to: [true, false], default: false)
       attribute(:start_join, kind_of: Array)
+      attribute(:rejoin_after_leave, kind_of:equal_to: [true, false], default: false)
       attribute(:statsd_addr, kind_of: String)
       attribute(:statsite_addr, kind_of: String)
       attribute(:syslog_facility, kind_of: String)
@@ -83,7 +84,7 @@ module ConsulCookbook
       # Transforms the resource into a JSON format which matches the
       # Consul service's configuration format.
       def to_json
-        for_keeps = %i{acl_datacenter acl_default_policy acl_down_policy acl_master_token acl_token acl_ttl addresses advertise_addr bind_addr bootstrap bootstrap_expect check_update_interval client_addr data_dir datacenter disable_anonymous_signature disable_remote_exec disable_update_check dns_config domain enable_debug enable_syslog encrypt leave_on_terminate log_level node_name ports protocol recurser retry_interval server server_name skip_leave_on_interrupt start_join statsd_addr statsite_addr syslog_facility ui_dir verify_incoming verify_outgoing verify_server_hostname watches}
+        for_keeps = %i{acl_datacenter acl_default_policy acl_down_policy acl_master_token acl_token acl_ttl addresses advertise_addr bind_addr bootstrap bootstrap_expect check_update_interval client_addr data_dir datacenter disable_anonymous_signature disable_remote_exec disable_update_check dns_config domain enable_debug enable_syslog encrypt leave_on_terminate log_level node_name ports protocol recurser retry_interval server server_name skip_leave_on_interrupt start_join rejoin_after_leave statsd_addr statsite_addr syslog_facility ui_dir verify_incoming verify_outgoing verify_server_hostname watches}
         for_keeps << %i{ca_file cert_file key_file} if tls?
         config = to_hash.keep_if do |k, _|
           for_keeps.include?(k.to_sym)
