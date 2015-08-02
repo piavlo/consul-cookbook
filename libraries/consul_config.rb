@@ -71,7 +71,7 @@ module ConsulCookbook
       attribute(:server_name, kind_of: String)
       attribute(:skip_leave_on_interrupt, equal_to: [true, false], default: false)
       attribute(:start_join, kind_of: Array)
-      attribute(:rejoin_after_leave, kind_of:equal_to: [true, false], default: false)
+      attribute(:rejoin_after_leave, equal_to: [true, false], default: false)
       attribute(:statsd_addr, kind_of: String)
       attribute(:statsite_addr, kind_of: String)
       attribute(:syslog_facility, kind_of: String)
